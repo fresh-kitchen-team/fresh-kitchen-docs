@@ -34,9 +34,14 @@ The root documents are the source of truth for the team:
 
 - Use `api/frontend-backend.md` for the frontend-backend boundary.
 - Use `api/backend-ai.md` for the backend-AI boundary.
+- Check `api/README.md` before creating or reorganizing API examples.
 - Keep examples in `api/examples/`.
 - Use readable explanation first, then link to example files.
 - Keep request and response examples small enough to understand.
+- Write API examples with `endpoint`, `request`, and `response` in the same JSON file.
+- Organize frontend-backend examples by domain folder and flow file, such as `api/examples/frontend-backend/item/create.json`.
+- Do not create new request-only or response-only JSON examples.
+- Do not expose internal DB IDs or master data IDs in frontend request DTOs unless the API contract explicitly requires it.
 
 ## Commit Workflow
 
