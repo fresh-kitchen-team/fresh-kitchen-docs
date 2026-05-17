@@ -17,16 +17,17 @@
     }
   },
   "response": {
+    "items": [
+      "우유",
+      "양파"
+    ],
     "detected_items": [
       {
-        "name": "우유",
-        "confidence": 0.91
+        "name": "우유"
       },
       {
-        "name": "양파",
-        "confidence": 0.87
+        "name": "양파"
       }
-    ],
-    "source": "vision"
+    ]
   }
 }

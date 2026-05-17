@@ -18,6 +18,7 @@
   },
   "response": {
     "recognized_text": "토마토 2개\n계란 1판",
+    "purchased_at": "2026-05-17",
     "items": [
       {
         "name": "토마토",
