@@ -35,6 +35,22 @@ Updated: 2026-05-17
 - 요청과 응답 예시를 `api/examples/`에 분리합니다.
 - 에러 응답과 실패 처리 기준을 정리합니다.
 
+12주차에는 AI-백엔드 DTO 추가사항을 진행합니다.
+
+- classification 응답의 `source` 값과 category 매핑 기준을 맞춥니다.
+- OCR 응답의 품목별 category DTO를 백엔드 저장 흐름에 맞춥니다.
+- AI 서버 원본 응답과 백엔드 보강 DTO의 차이를 문서와 예시에 반영합니다.
+
+프론트엔드-백엔드 Item DTO는 내부 DB ID가 프론트 계약에 새지 않도록 정리합니다.
+
+- Item 생성/수정 request DTO에서 `catalogId`를 제거합니다.
+- 백엔드는 `name` 또는 AI/OCR 인식 결과명을 catalog master data에 매핑합니다.
+- Item 조회/list/detail response DTO에는 `catalogId`, `category`, `emoji`를 포함해 UI가 카테고리를 표시할 수 있게 합니다.
+- Item 생성/수정 request DTO에서 `storageId`를 `storageType`으로 전환합니다.
+- 백엔드는 인증 사용자와 `storageType`으로 유저별 storage ID를 찾아 매핑합니다.
+- Storage type 공개 값은 `FRIDGE`, `FREEZER`, `PANTRY`로 맞춥니다.
+- API 예시는 도메인 폴더와 흐름별 JSON으로 관리하고, 한 파일 안에 `endpoint`, `request`, `response`를 함께 작성합니다.
+
 ## v0.4 Presentation Ready
 
 발표와 시연을 바로 연습할 수 있는 상태로 만듭니다.

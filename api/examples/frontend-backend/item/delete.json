@@ -1,0 +1,25 @@
+{
+  "domain": "item",
+  "flow": "delete",
+  "endpoint": {
+    "method": "DELETE",
+    "path": "/api/v1/items/{itemId}"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    },
+    "pathParams": {
+      "itemId": 101
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": null
+  },
+  "notes": [
+    "삭제 성공 후 해당 item은 목록과 홈 요약에서 제외됩니다."
+  ]
+}

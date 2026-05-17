@@ -1,0 +1,71 @@
+{
+  "domain": "home",
+  "flow": "summary",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/home/summary"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "totalCount": 42,
+      "freshCount": 35,
+      "nearExpiryCount": 5,
+      "expiredCount": 2,
+      "storages": [
+        {
+          "storage": "FRIDGE",
+          "emoji": "🥛",
+          "name": "냉장실",
+          "itemCount": 28,
+          "filterKey": "fridge"
+        },
+        {
+          "storage": "FREEZER",
+          "emoji": "❄️",
+          "name": "냉동실",
+          "itemCount": 8,
+          "filterKey": "freezer"
+        },
+        {
+          "storage": "PANTRY",
+          "emoji": "🥫",
+          "name": "팬트리",
+          "itemCount": 6,
+          "filterKey": "pantry"
+        }
+      ],
+      "nearExpiryItems": [
+        {
+          "id": 101,
+          "name": "계란",
+          "storage": "FRIDGE",
+          "expiryDate": "2026-05-19",
+          "status": "NEAR_EXPIRY",
+          "emoji": "🥚"
+        }
+      ],
+      "expiredItems": [],
+      "recentItems": [
+        {
+          "id": 102,
+          "name": "토마토",
+          "storage": "FRIDGE",
+          "expiryDate": "2026-05-20",
+          "status": "FRESH",
+          "emoji": "🍅"
+        }
+      ]
+    }
+  },
+  "notes": [
+    "홈 화면에서 여러 item API를 조합하지 않도록 요약 응답을 한 번에 받습니다."
+  ]
+}

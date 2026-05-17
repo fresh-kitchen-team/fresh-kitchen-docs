@@ -1,0 +1,50 @@
+{
+  "domain": "scan",
+  "flow": "ingredient-image",
+  "endpoint": {
+    "method": "POST",
+    "path": "/api/v1/scan/ingredient-image"
+  },
+  "request": {
+    "headers": {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer {accessToken}"
+    },
+    "parts": {
+      "file": {
+        "filename": "ingredient.jpg",
+        "contentType": "image/jpeg"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "scanType": "INGREDIENT_IMAGE",
+      "imageAsset": {
+        "imageAssetId": 50,
+        "kind": "INGREDIENT",
+        "storageProvider": "LOCAL",
+        "imageUrl": "https://static.example.com/images/1/ingredient/tomato.webp"
+      },
+      "recognizedItems": [
+        {
+          "name": "토마토",
+          "confidence": 0.94
+        },
+        {
+          "name": "방울토마토",
+          "confidence": 0.82
+        }
+      ],
+      "createdAt": "2026-05-17T10:15:30+09:00"
+    }
+  },
+  "notes": [
+    "스캔 응답은 item을 바로 저장하지 않습니다.",
+    "프론트가 확인 화면에서 값을 확정한 뒤 item/create.json 흐름으로 저장합니다.",
+    "imageAsset.imageAssetId는 item create request의 imageAssetId로 연결할 수 있습니다."
+  ]
+}

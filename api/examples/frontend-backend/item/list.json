@@ -1,0 +1,36 @@
+{
+  "domain": "item",
+  "flow": "list",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/items"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": [
+      {
+        "id": 101,
+        "name": "토마토",
+        "status": "FRESH",
+        "catalogId": 1,
+        "storageType": "FRIDGE",
+        "category": "VEGETABLE",
+        "expiryDate": "2026-05-20",
+        "emoji": "🍅",
+        "purchaseDate": "2026-05-17",
+        "memo": "직접 등록"
+      }
+    ]
+  },
+  "notes": [
+    "response의 catalogId, category, emoji는 백엔드 catalog master data 매핑 결과입니다.",
+    "현재 구현 응답 필드명은 storageType이 아니라 storage입니다."
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "domain": "scan",
+  "flow": "receipt-image",
+  "endpoint": {
+    "method": "POST",
+    "path": "/api/v1/scan/receipt-image"
+  },
+  "request": {
+    "headers": {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer {accessToken}"
+    },
+    "parts": {
+      "file": {
+        "filename": "receipt.jpg",
+        "contentType": "image/jpeg"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "scanType": "RECEIPT_IMAGE",
+      "purchasedAt": "2026-05-17",
+      "purchasedAtSourceType": "OCR",
+      "recognizedItems": [
+        {
+          "name": "토마토",
+          "registeredAt": "2026-05-17"
+        },
+        {
+          "name": "우유",
+          "registeredAt": "2026-05-17"
+        }
+      ],
+      "createdAt": "2026-05-17T10:15:30+09:00"
+    }
+  },
+  "notes": [
+    "현재 구현 기준 receipt scan 응답에는 imageAsset, ocrText, confidence가 없습니다.",
+    "프론트가 품목별로 값을 확정한 뒤 item/create.json 흐름으로 저장합니다."
+  ]
+}

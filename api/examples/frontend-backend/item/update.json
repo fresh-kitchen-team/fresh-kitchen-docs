@@ -1,0 +1,32 @@
+{
+  "domain": "item",
+  "flow": "update",
+  "endpoint": {
+    "method": "PATCH",
+    "path": "/api/v1/items/{itemId}"
+  },
+  "request": {
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {accessToken}"
+    },
+    "pathParams": {
+      "itemId": 101
+    },
+    "body": {
+      "storageType": "FREEZER",
+      "memo": "냉동 보관으로 변경"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": null
+  },
+  "notes": [
+    "목표 계약 기준 예시입니다.",
+    "수정 요청은 부분 수정입니다.",
+    "request에는 catalogId를 넣지 않습니다."
+  ]
+}
