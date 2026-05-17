@@ -1,0 +1,15 @@
+{
+  "method": "POST",
+  "path": "/internal/v1/food-classification",
+  "headers": {
+    "Content-Type": "multipart/form-data",
+    "Authorization": "Bearer {aiServerToken}",
+    "X-Request-Id": "{uuid}"
+  },
+  "parts": {
+    "file": {
+      "filename": "ingredient.jpg",
+      "contentType": "image/jpeg"
+    }
+  }
+}

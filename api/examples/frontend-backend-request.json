@@ -1,0 +1,16 @@
+{
+  "method": "POST",
+  "path": "/api/v1/items",
+  "headers": {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {accessToken}"
+  },
+  "body": {
+    "name": "우유",
+    "storageId": 1,
+    "expiryDate": "2026-05-24",
+    "purchaseDate": "2026-05-17",
+    "memo": "아침 식사용",
+    "imageAssetId": 12
+  }
+}
