@@ -14,7 +14,8 @@ The root documents are the source of truth for the team:
 - `STATUS.md`: current progress
 - `SCOPE.md`: included and excluded project scope
 - `ROADMAP.md`: upcoming document and project milestones
-- `PRESENTATION.md`: presentation scope and demo flow
+- `PRESENTATION.md`: presentation index and demo flow links
+- `PRESENTATION/`: week 12, week 14, and week 16 final presentation storyboards
 - `api/frontend-backend.md`: frontend-backend API contract
 - `api/backend-ai.md`: backend-AI API contract
 
@@ -25,6 +26,8 @@ The root documents are the source of truth for the team:
 - Avoid tables unless comparison or field mapping is genuinely clearer as a table.
 - Do not create archive-style folders such as `specs/` or `decisions/`.
 - Update the existing root documents instead of creating new status documents.
+- Keep presentation storyboards in `PRESENTATION/` and link them from `PRESENTATION.md`.
+- When writing scope, presentation, development range, or remaining-work sections, separate content by part such as frontend, backend, AI, and common/integration.
 - Separate long JSON or YAML examples into `api/examples/`.
 - Keep confirmed content separate from unresolved questions.
 - Remove or update stale content instead of preserving old explanations.
