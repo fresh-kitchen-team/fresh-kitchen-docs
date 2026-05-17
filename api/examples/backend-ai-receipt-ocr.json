@@ -21,10 +21,12 @@
     "items": [
       {
         "name": "토마토",
+        "category": "VEGETABLE",
         "quantity": "2개"
       },
       {
         "name": "계란",
+        "category": "EGG",
         "quantity": "1판"
       }
     ],
