@@ -6,7 +6,7 @@ FreshKitchen 팀이 지금 당장 확인해야 하는 문서를 관리하는 저
 
 ## Start Here
 
-- [STATUS.md](STATUS.md): 현재 진행 상태
+- [STATUS.md](STATUS.md): 현재 진행 상태와 progress 관리 범위
 - [SCOPE.md](SCOPE.md): 이번 프로젝트의 포함 범위와 제외 범위
 - [ROADMAP.md](ROADMAP.md): 남은 작업 순서와 문서 버전
 - [PRESENTATION.md](PRESENTATION.md): 발표 범위와 시연 흐름
