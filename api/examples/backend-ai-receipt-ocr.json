@@ -1,0 +1,33 @@
+{
+  "endpoint": {
+    "method": "POST",
+    "path": "/internal/v1/receipt-ocr"
+  },
+  "request": {
+    "headers": {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer {aiServerToken}",
+      "X-Request-Id": "{uuid}"
+    },
+    "parts": {
+      "file": {
+        "filename": "receipt.jpg",
+        "contentType": "image/jpeg"
+      }
+    }
+  },
+  "response": {
+    "recognized_text": "토마토 2개\n계란 1판",
+    "items": [
+      {
+        "name": "토마토",
+        "quantity": "2개"
+      },
+      {
+        "name": "계란",
+        "quantity": "1판"
+      }
+    ],
+    "source": "ocr"
+  }
+}

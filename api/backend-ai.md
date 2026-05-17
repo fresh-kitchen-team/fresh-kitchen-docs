@@ -41,23 +41,21 @@ AI 서버는 백엔드 요청에 대한 분석 결과나 추천 결과를 응답
 - AI 서버 5xx 응답
 - 응답 형식 오류
 
-## Request Examples
+## Endpoint Examples
 
-요청 예시는 본문에 길게 쓰지 않습니다.
+엔드포인트별 예시는 본문에 길게 쓰지 않습니다.
+
+하나의 엔드포인트는 하나의 JSON 파일로 관리합니다.
+
+각 파일 안에서 `request`와 `response`를 구분합니다.
 
 아래 파일을 갱신합니다.
 
-- [backend-ai-request.json](examples/backend-ai-request.json)
+- [backend-ai-food-classification.json](examples/backend-ai-food-classification.json)
+- [backend-ai-receipt-ocr.json](examples/backend-ai-receipt-ocr.json)
+- [backend-ai-fridge-detection.json](examples/backend-ai-fridge-detection.json)
 
 현재 예시는 multipart 요청을 JSON으로 설명한 문서용 예시입니다.
-
-## Response Examples
-
-응답 예시는 본문에 길게 쓰지 않습니다.
-
-아래 파일을 갱신합니다.
-
-- [backend-ai-response.json](examples/backend-ai-response.json)
 
 ## Open Questions
 

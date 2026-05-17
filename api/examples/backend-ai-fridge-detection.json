@@ -1,0 +1,32 @@
+{
+  "endpoint": {
+    "method": "POST",
+    "path": "/internal/v1/fridge-detection"
+  },
+  "request": {
+    "headers": {
+      "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer {aiServerToken}",
+      "X-Request-Id": "{uuid}"
+    },
+    "parts": {
+      "file": {
+        "filename": "fridge.jpg",
+        "contentType": "image/jpeg"
+      }
+    }
+  },
+  "response": {
+    "detected_items": [
+      {
+        "name": "우유",
+        "confidence": 0.91
+      },
+      {
+        "name": "양파",
+        "confidence": 0.87
+      }
+    ],
+    "source": "vision"
+  }
+}
