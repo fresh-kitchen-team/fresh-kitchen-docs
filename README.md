@@ -1,17 +1,28 @@
 # FreshKitchen Docs
 
-FreshKitchen 팀이 지금 당장 확인해야 하는 문서를 관리하는 저장소입니다.
+FreshKitchen 팀이 지금 당장 확인해야 하는 문서를 바로 찾도록 관리하는 저장소입니다.
 
-이 저장소는 오래된 문서를 쌓아두는 곳이 아니라, 팀원이 현재 상태를 빠르게 확인하고 같은 기준으로 작업하기 위한 문서판입니다. 문서가 바뀌면 새 파일을 계속 늘리기보다 루트 문서를 직접 갱신합니다.
+이 저장소는 오래된 문서를 쌓아두는 곳이 아니라, 팀원이 현재 상태를 빠르게 확인하고 같은 기준으로 작업하기 위한 문서판입니다. 원하는 내용을 찾기 위해 여러 파일을 뒤지지 않도록, 목적별로 볼 파일을 분명히 나눕니다.
 
-## Start Here
+문서가 바뀌면 새 파일을 계속 늘리기보다 현재 기준 문서를 직접 갱신합니다.
 
-- [STATUS.md](STATUS.md): 현재 진행 상태와 progress 관리 범위
-- [SCOPE.md](SCOPE.md): 이번 프로젝트의 포함 범위와 제외 범위
-- [ROADMAP.md](ROADMAP.md): 남은 작업 순서와 문서 버전
-- [PRESENTATION.md](PRESENTATION.md): 발표 문서 안내와 12, 14, 16주차 스토리보드 링크
-- [api/frontend-backend.md](api/frontend-backend.md): 프론트엔드와 백엔드 API 계약
-- [api/backend-ai.md](api/backend-ai.md): 백엔드와 AI 서버 API 계약
+## 무엇을 찾고 있나요?
+
+지금 프로젝트가 어디까지 왔는지, 무엇이 진행 중이고 무엇이 막혔는지 확인하려면 [STATUS.md](STATUS.md)를 봅니다.
+
+이번 단계나 최종 발표에 포함되는 기능과 제외되는 기능을 확인하려면 [SCOPE.md](SCOPE.md)를 봅니다.
+
+12~16주차에 어떤 작업을 먼저 맞춰야 하는지, 파트별 ToDo가 궁금하면 [ROADMAP.md](ROADMAP.md)를 봅니다.
+
+발표를 준비하거나 시연 순서, 스토리보드, 체크리스트가 필요하면 [PRESENTATION.md](PRESENTATION.md)에서 해당 주차 발표 문서로 이동합니다.
+
+프론트엔드와 백엔드가 맞춰야 하는 DTO, API 경로, 요청/응답 예시가 필요하면 [api/frontend-backend.md](api/frontend-backend.md)를 봅니다.
+
+백엔드가 AI 서버를 언제 어떻게 호출하는지, AI 응답과 실패 조건을 맞춰야 하면 [api/backend-ai.md](api/backend-ai.md)를 봅니다.
+
+API 예시 JSON을 어디에 어떤 형식으로 작성해야 하는지 확인하려면 [api/README.md](api/README.md)를 봅니다.
+
+AI agent로 문서를 수정하거나 커밋 규칙을 확인해야 하면 [AGENTS.md](AGENTS.md)를 봅니다.
 
 ## How We Write
 
