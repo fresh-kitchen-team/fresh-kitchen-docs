@@ -1,0 +1,26 @@
+{
+  "domain": "legal",
+  "flow": "agreement-post",
+  "endpoint": {
+    "method": "POST",
+    "path": "/api/v1/legal/agreement"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "termsAgreedAt": "2026-05-17T21:30:00+09:00",
+      "privacyAgreedAt": "2026-05-17T21:30:00+09:00"
+    }
+  },
+  "notes": [
+    "이용약관 + 개인정보처리방침 동시 동의 처리",
+    "이미 동의한 경우에도 시각 갱신"
+  ]
+}

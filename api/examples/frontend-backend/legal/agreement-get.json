@@ -1,0 +1,28 @@
+{
+  "domain": "legal",
+  "flow": "agreement-get",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/legal/agreement"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "termsAgreed": true,
+      "privacyAgreed": true,
+      "termsAgreedAt": "2026-05-17T21:30:00+09:00",
+      "privacyAgreedAt": "2026-05-17T21:30:00+09:00"
+    }
+  },
+  "notes": [
+    "미동의 시 termsAgreed/privacyAgreed: false, 시각 필드: null",
+    "온보딩 진입 시 동의 여부 확인용"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "domain": "inquiry",
+  "flow": "create",
+  "endpoint": {
+    "method": "POST",
+    "path": "/api/v1/inquiries",
+    "contentType": "multipart/form-data"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    },
+    "formData": {
+      "type": "INQUIRY",
+      "category": "RECIPE",
+      "content": "레시피 추천이 잘못된 것 같습니다.",
+      "image": "(선택) 첨부 이미지 파일"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": null
+  },
+  "notes": [
+    "type: INQUIRY (문의), REPORT (신고)",
+    "category: RECIPE (레시피), AI (AI 관련), OTHER (기타)",
+    "content: @NotBlank, 최대 5000자",
+    "image: 선택 첨부, multipart 파일",
+    "관리자 이메일로 발송됨"
+  ]
+}

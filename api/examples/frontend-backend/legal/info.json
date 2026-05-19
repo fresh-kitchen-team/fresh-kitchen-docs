@@ -1,0 +1,23 @@
+{
+  "domain": "legal",
+  "flow": "info",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/legal"
+  },
+  "request": {},
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "termsUrl": "https://www.notion.so/freshkitchen-terms",
+      "privacyUrl": "https://www.notion.so/freshkitchen-privacy"
+    }
+  },
+  "notes": [
+    "인증 불필요 (공개 API)",
+    "노션 공개 페이지 URL 반환",
+    "내용 수정 시 노션에서만 편집하면 즉시 반영 (재배포 불필요)"
+  ]
+}

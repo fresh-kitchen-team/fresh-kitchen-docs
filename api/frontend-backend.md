@@ -1,7 +1,7 @@
 # Frontend-Backend API
 
 Status: draft
-Updated: 2026-05-17
+Updated: 2026-05-19
 
 ## Purpose
 
@@ -44,6 +44,21 @@ api/examples/frontend-backend/
     list.json
     detail.json
     delete.json
+    consume.json
+  analytics/
+    summary.json
+    expiring-items.json
+  tips/
+    storage.json
+    recycling.json
+  inquiry/
+    create.json
+  legal/
+    info.json
+    agreement-get.json
+    agreement-post.json
+  app/
+    version.json
   scan/
     ingredient-image.json
     receipt-image.json
@@ -168,6 +183,91 @@ JSON 문법은 기본 확인으로 아래 명령을 사용합니다.
 ```sh
 find api/examples -name '*.json' -print0 | xargs -0 -n1 python3 -m json.tool >/dev/null
 ```
+
+## Item Consume API
+
+소비 처리 API는 ACTIVE 상태의 식재료를 CONSUMED 상태로 변경합니다.
+
+| Flow | Method | Path | Example |
+|---|---|---|---|
+| consume | `PATCH` | `/api/v1/items/{itemId}/consume` | [item/consume.json](examples/frontend-backend/item/consume.json) |
+
+ACTIVE 이외 상태에서 호출 시 409 CONFLICT를 반환합니다.
+
+삭제(DELETE)는 ACTIVE 상태를 DISCARDED로 변경합니다.
+
+## Analytics API
+
+분석 API는 식재료 유통기한 현황, 카테고리별 통계, 폐기율을 제공합니다.
+
+| Flow | Method | Path | Auth | Example |
+|---|---|---|---|---|
+| summary | `GET` | `/api/v1/analytics/summary` | 필요 | [analytics/summary.json](examples/frontend-backend/analytics/summary.json) |
+| expiring-items | `GET` | `/api/v1/analytics/expiring-items` | 필요 | [analytics/expiring-items.json](examples/frontend-backend/analytics/expiring-items.json) |
+
+### Summary
+
+카테고리별 활성/긴급 수량, 폐기율, 긴급 항목 목록을 한 번에 반환합니다.
+
+카테고리는 4개 DisplayCategory로 고정됩니다.
+
+- `VEGETABLE_FRUIT`: 채소/과일
+- `DAIRY_DRINK`: 유제품
+- `MEAT_SEAFOOD`: 육류/수산물
+- `ETC`: 기타
+
+urgentCount는 D-0 ~ D-3 범위이며 만료된 항목은 제외합니다. urgentItems는 최대 10개입니다.
+
+### Expiring Items
+
+유통기한 임박 및 만료 식재료 목록을 반환합니다.
+
+- `maxDDay`: 기본값 10, 최대 30. D-Day 이내 항목 조회.
+- `storageType`: FRIDGE, FREEZER, PANTRY. 선택 필터.
+- dDay가 음수인 항목은 이미 만료된 식재료입니다 (의도적 포함).
+
+## Tips API
+
+보관 팁과 분리배출 가이드를 제공하는 공개 API입니다. 인증 불필요.
+
+| Flow | Method | Path | Example |
+|---|---|---|---|
+| storage | `GET` | `/api/v1/tips/storage` | [tips/storage.json](examples/frontend-backend/tips/storage.json) |
+| recycling | `GET` | `/api/v1/tips/recycling` | [tips/recycling.json](examples/frontend-backend/tips/recycling.json) |
+
+보관 팁은 `category` 쿼리 파라미터로 필터링할 수 있습니다. 미입력 시 전체 반환.
+
+## Inquiry API
+
+문의하기 API는 관리자 이메일로 문의/신고를 발송합니다.
+
+| Flow | Method | Path | Auth | Example |
+|---|---|---|---|---|
+| create | `POST` | `/api/v1/inquiries` | 필요 | [inquiry/create.json](examples/frontend-backend/inquiry/create.json) |
+
+multipart/form-data로 type, category, content, image(선택)를 전송합니다.
+
+## Legal API
+
+이용약관/개인정보처리방침 URL 조회와 동의 처리 API입니다.
+
+| Flow | Method | Path | Auth | Example |
+|---|---|---|---|---|
+| info | `GET` | `/api/v1/legal` | 불필요 | [legal/info.json](examples/frontend-backend/legal/info.json) |
+| agreement (조회) | `GET` | `/api/v1/legal/agreement` | 필요 | [legal/agreement-get.json](examples/frontend-backend/legal/agreement-get.json) |
+| agreement (동의) | `POST` | `/api/v1/legal/agreement` | 필요 | [legal/agreement-post.json](examples/frontend-backend/legal/agreement-post.json) |
+
+약관 URL은 노션 공개 페이지를 가리킵니다. 내용 수정 시 노션에서만 편집하면 재배포 없이 반영됩니다.
+
+## App Version API
+
+앱 버전 체크 API는 강제/선택 업데이트를 판단합니다. 인증 불필요.
+
+| Flow | Method | Path | Example |
+|---|---|---|---|
+| version | `GET` | `/api/v1/app/version` | [app/version.json](examples/frontend-backend/app/version.json) |
+
+앱 시작 시 호출하여 `forceUpdate`가 true이면 `minimumVersion` 미만 사용자를 업데이트 화면으로 안내합니다.
 
 ## Open Questions
 

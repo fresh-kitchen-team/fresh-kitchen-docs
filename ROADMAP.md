@@ -1,7 +1,7 @@
 # Roadmap
 
 Status: draft
-Updated: 2026-05-17
+Updated: 2026-05-19
 
 ## Purpose
 
@@ -69,7 +69,7 @@ Updated: 2026-05-17
 ### 6. 냉장고 detection과 분석/팁 연결
 
 - 백엔드 할 일:
-  - 분석/팁 화면에 연결할 백엔드 응답 또는 라우팅 흐름을 준비합니다.
+  - ~~분석/팁 화면에 연결할 백엔드 응답 또는 라우팅 흐름을 준비합니다.~~ (완료: Analytics API + Tips API 구현)
 - AI 할 일:
   - 냉장고 detection 결과를 백엔드와 연결하는 작업을 시작합니다.
 

@@ -1,0 +1,50 @@
+{
+  "domain": "analytics",
+  "flow": "expiring-items",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/analytics/expiring-items"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    },
+    "queryParams": {
+      "maxDDay": 10,
+      "storageType": "FRIDGE"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": [
+      {
+        "id": 10,
+        "name": "우유",
+        "emoji": "🥛",
+        "category": "DAIRY_DRINK",
+        "categoryDisplayName": "유제품",
+        "expiresAt": "2026-05-20",
+        "dDay": 1,
+        "storageType": "FRIDGE"
+      },
+      {
+        "id": 8,
+        "name": "두부",
+        "emoji": "🫘",
+        "category": "ETC",
+        "categoryDisplayName": "기타",
+        "expiresAt": "2026-05-17",
+        "dDay": -2,
+        "storageType": "FRIDGE"
+      }
+    ]
+  },
+  "notes": [
+    "maxDDay: 기본값 10, 최대 30 (@PositiveOrZero @Max(30))",
+    "storageType: FRIDGE, FREEZER, PANTRY (선택, 미입력 시 전체)",
+    "dDay가 음수인 항목은 이미 만료된 식재료 (의도적 포함)",
+    "정렬: expiresAt 오름차순 (임박한 것부터)"
+  ]
+}

@@ -1,13 +1,11 @@
 # Status
 
 Status: draft
-Updated: 2026-05-17
+Updated: 2026-05-19
 
 ## Summary
 
-FreshKitchen 문서 저장소의 초기 구조를 정리하는 단계입니다.
-
-현재 목표는 팀원이 프로젝트 범위, 진행 상태, 발표 준비, API 계약을 한 곳에서 확인할 수 있게 만드는 것입니다.
+FreshKitchen 문서 저장소의 초기 구조를 정리하고, API 연결 계약을 파트별로 문서화하는 단계입니다.
 
 ## Done
 
@@ -15,11 +13,16 @@ FreshKitchen 문서 저장소의 초기 구조를 정리하는 단계입니다.
 - 루트 문서 중심으로 운영하기로 정했습니다.
 - API 문서는 프론트엔드-백엔드, 백엔드-AI 경계로 나누기로 정했습니다.
 - 문서 작업용 AI 규칙과 커밋 skill을 두기로 정했습니다.
+- API 예시 파일의 기본 위치와 구조를 만들었습니다.
+- Analytics API (summary, expiring-items) 구현 및 문서화를 완료했습니다.
+- Tips API (storage, recycling) 구현 및 문서화를 완료했습니다.
+- Item Consume API 구현 및 문서화를 완료했습니다.
+- Store Release API (inquiry, app version, legal) 구현 및 문서화를 완료했습니다.
+- API 명세서를 Notion에 작성했습니다.
 
 ## Doing
 
 - 루트 문서의 초안을 작성합니다.
-- API 예시 파일의 기본 위치를 만듭니다.
 - 발표와 시연 준비 문서를 한 파일에서 확인할 수 있게 정리합니다.
 
 ## Blocked

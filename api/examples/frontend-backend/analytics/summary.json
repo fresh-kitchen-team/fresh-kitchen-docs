@@ -1,0 +1,81 @@
+{
+  "domain": "analytics",
+  "flow": "summary",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/analytics/summary"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "totalActiveCount": 12,
+      "urgentCount": 3,
+      "topUrgentCategory": "DAIRY_DRINK",
+      "topUrgentCategoryDisplayName": "유제품",
+      "topUrgentCategoryCount": 2,
+      "message": "유통기한이 3일 이내인 식재료가 3개 있습니다. 가장 주의가 필요한 카테고리는 유제품(2개)입니다.",
+      "overallDiscardRate": 12.5,
+      "categoryStats": [
+        {
+          "category": "VEGETABLE_FRUIT",
+          "displayName": "채소/과일",
+          "activeCount": 5,
+          "urgentCount": 1,
+          "discardRate": 10.0
+        },
+        {
+          "category": "DAIRY_DRINK",
+          "displayName": "유제품",
+          "activeCount": 3,
+          "urgentCount": 2,
+          "discardRate": 20.0
+        },
+        {
+          "category": "MEAT_SEAFOOD",
+          "displayName": "육류/수산물",
+          "activeCount": 2,
+          "urgentCount": 0,
+          "discardRate": 0.0
+        },
+        {
+          "category": "ETC",
+          "displayName": "기타",
+          "activeCount": 2,
+          "urgentCount": 0,
+          "discardRate": 5.0
+        }
+      ],
+      "urgentItems": [
+        {
+          "id": 10,
+          "name": "우유",
+          "emoji": "🥛",
+          "expiresAt": "2026-05-20",
+          "dDay": 1,
+          "storageType": "FRIDGE"
+        },
+        {
+          "id": 15,
+          "name": "요거트",
+          "emoji": "🥛",
+          "expiresAt": "2026-05-21",
+          "dDay": 2,
+          "storageType": "FRIDGE"
+        }
+      ]
+    }
+  },
+  "notes": [
+    "urgentCount: 유통기한 D-0 ~ D-3 범위 (만료된 항목 제외)",
+    "urgentItems: 최대 10개, expiresAt 오름차순",
+    "overallDiscardRate: 폐기 / (소비 + 폐기) * 100, 소수점 1자리",
+    "categoryStats: 4개 DisplayCategory 고정 (VEGETABLE_FRUIT, DAIRY_DRINK, MEAT_SEAFOOD, ETC)"
+  ]
+}

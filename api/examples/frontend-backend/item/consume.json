@@ -1,0 +1,29 @@
+{
+  "domain": "item",
+  "flow": "consume",
+  "endpoint": {
+    "method": "PATCH",
+    "path": "/api/v1/items/{itemId}/consume"
+  },
+  "request": {
+    "headers": {
+      "Authorization": "Bearer {accessToken}"
+    },
+    "pathParams": {
+      "itemId": 10
+    }
+  },
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": {
+      "consumedAt": "2026-05-19"
+    }
+  },
+  "notes": [
+    "ACTIVE 상태의 식재료만 소비 처리 가능",
+    "이미 CONSUMED 또는 DISCARDED 상태면 409 CONFLICT (INGREDIENT-409-2)",
+    "소비 처리 후 상태: ACTIVE -> CONSUMED"
+  ]
+}

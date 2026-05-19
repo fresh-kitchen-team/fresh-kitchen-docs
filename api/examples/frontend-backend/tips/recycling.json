@@ -1,0 +1,27 @@
+{
+  "domain": "tips",
+  "flow": "recycling",
+  "endpoint": {
+    "method": "GET",
+    "path": "/api/v1/tips/recycling"
+  },
+  "request": {},
+  "response": {
+    "status": 200,
+    "code": "COMMON-200",
+    "message": "Success",
+    "data": [
+      {
+        "id": 1,
+        "name": "우유팩",
+        "wasteType": "종이류",
+        "description": "내용물을 비우고 헹군 뒤 펼쳐서 종이류로 분리배출합니다."
+      }
+    ]
+  },
+  "notes": [
+    "인증 불필요 (공개 API)",
+    "전체 목록 반환 (필터 없음)",
+    "id 오름차순 정렬"
+  ]
+}

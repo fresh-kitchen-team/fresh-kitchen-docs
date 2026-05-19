@@ -1,7 +1,7 @@
 # API Documentation Guide
 
 Status: draft
-Updated: 2026-05-17
+Updated: 2026-05-19
 
 ## Purpose
 
@@ -61,6 +61,21 @@ api/examples/frontend-backend/
     list.json
     detail.json
     delete.json
+    consume.json
+  analytics/
+    summary.json
+    expiring-items.json
+  tips/
+    storage.json
+    recycling.json
+  inquiry/
+    create.json
+  legal/
+    info.json
+    agreement-get.json
+    agreement-post.json
+  app/
+    version.json
   scan/
     ingredient-image.json
     receipt-image.json
