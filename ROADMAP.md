@@ -1,7 +1,7 @@
 # Roadmap
 
 Status: draft
-Updated: 2026-05-19
+Updated: 2026-05-22
 
 ## Purpose
 
@@ -75,16 +75,106 @@ Updated: 2026-05-19
 
 ## 13주차
 
-### 1. 냉장고 detection 프론트-백엔드 연동
+### 1. SCAN 서비스 1차 연결
+
+프론트엔드, 백엔드, AI 서버를 연결해 사용자가 스캔 결과를 확인하고 저장까지 이어갈 수 있는 흐름을 맞춥니다.
 
 - 프론트 할 일:
-  - 냉장고 detection 화면으로 이동할 수 있는 네비게이션을 추가합니다.
-  - 냉장고 detection 요청과 결과 표시 흐름을 백엔드 API와 연결합니다.
+  - classification, receipt OCR, fridge detection 진입 화면과 결과 확인 화면을 백엔드 SCAN API에 연결합니다.
+  - 스캔 결과는 바로 저장하지 않고, 사용자가 `recognizedItems`를 확인하거나 수정한 뒤 저장하도록 흐름을 맞춥니다.
+  - classification 결과 화면에서는 인식된 식재료 후보와 함께 업로드한 실물 사진을 유저가 볼 수 있게 표시합니다.
 - 백엔드 할 일:
-  - 냉장고 detection 프론트 요청을 받을 API 흐름을 정리합니다.
-  - AI detection 결과를 프론트에서 사용할 응답 DTO로 내려줍니다.
+  - SCAN API가 AI 서버 classification, receipt OCR, fridge detection 엔드포인트를 호출하는 흐름을 연결합니다.
+  - AI 서버 원본 응답을 프론트 확인 화면에서 사용할 DTO로 변환합니다.
+  - classification 응답의 `recognizedItems`에 실물 사진 참조값을 포함합니다.
+  - receipt OCR과 fridge detection 응답은 기본 표시값으로 `emoji`를 내려줍니다.
+  - AI 응답의 식재료명 또는 class label을 catalog/category/emoji 매핑에 사용할 수 있게 정규화합니다.
+- AI 할 일:
+  - classification, receipt OCR, fridge detection 응답에서 백엔드가 후보명으로 사용할 값을 안정적으로 내려줍니다.
+  - classification은 실물 사진과 후보 식재료가 같은 결과 항목으로 연결될 수 있게 응답 기준을 확인합니다.
+  - receipt OCR과 fridge detection은 품목명이 emoji 매핑에 사용할 수 있을 만큼 일관적인지 확인합니다.
+
+### 2. classification 실물 사진 저장과 썸네일 연결
+
+classification은 사용자가 찍은 실물 사진을 저장 후 조회 화면의 대표 이미지로 사용할 수 있게 맞춥니다.
+
+- 프론트 할 일:
+  - classification 결과 저장 요청에서 선택한 후보와 실물 사진 참조값을 함께 넘길 수 있게 준비합니다.
+  - 저장 성공 후 목록, 상세, 홈/요약 등 GET 응답에서 내려오는 썸네일을 그대로 표시합니다.
+- 백엔드 할 일:
+  - classification 저장 흐름에서 실물 사진을 Item의 대표 이미지 후보로 연결합니다.
+  - 저장 성공 후 Item list/detail/home summary 등 어디서 GET을 하든 같은 썸네일 값이 내려오도록 응답 DTO를 맞춥니다.
+  - 이미지가 있는 Item은 이미지가 primary 표시값이 되도록 합니다.
+- 공통/통합 할 일:
+  - classification 저장 후 바로 목록을 갱신했을 때 실물 사진 썸네일이 보이는지 확인합니다.
+  - 같은 Item을 상세 화면이나 다른 요약 API에서 조회해도 썸네일 기준이 흔들리지 않는지 확인합니다.
+
+### 3. emoji와 image primary 표시 정책
+
+Item 화면 표시값은 `emoji`와 `image` 중 하나가 primary가 되도록 구현 방향을 정합니다.
+
+- 프론트 할 일:
+  - 응답에 `image`가 있으면 이미지 썸네일을 우선 표시합니다.
+  - 응답에 `image`가 없으면 `emoji`를 기본 표시값으로 사용합니다.
+  - receipt OCR과 fridge detection으로 저장한 Item은 기본적으로 emoji 표시를 사용합니다.
+- 백엔드 할 일:
+  - Item 응답에서 primary 표시값을 판단할 수 있게 `image`와 `emoji`를 일관되게 내려줍니다.
+  - `image`가 없으면 식재료명, catalog, category 기준으로 매핑 가능한 `emoji`를 찾아 내려줍니다.
+  - emoji 매핑 실패 시 사용할 기본 표시값을 정합니다.
+- AI 할 일:
+  - AI 응답의 후보명이 백엔드 emoji 매핑 테이블과 맞물릴 수 있게 불필요한 설명 문장보다 식재료명 중심으로 응답합니다.
 
 ## 14주차
+
+### 1. multipart 업로드에서 presigned URL 방식으로 리팩토링
+
+SCAN과 이미지 저장 흐름의 파일 전달 방식을 multipart 직접 업로드에서 presigned URL 기반으로 전환할 계획을 세우고 적용합니다.
+
+- 프론트 할 일:
+  - 이미지 파일을 백엔드 SCAN API에 직접 multipart로 보내는 흐름을 presigned URL 업로드 흐름으로 바꿉니다.
+  - presigned URL 발급, 스토리지 업로드, 업로드 완료 후 scan 요청 순서로 화면 로직을 정리합니다.
+  - 업로드 실패, scan 실패, 저장 실패를 사용자가 구분할 수 있게 상태 처리를 준비합니다.
+- 백엔드 할 일:
+  - presigned URL 발급 API와 업로드 완료 후 사용할 이미지 참조값 정책을 정리합니다.
+  - SCAN API가 multipart file 대신 업로드된 이미지 참조값으로 AI 서버 호출 또는 내부 처리를 진행하도록 리팩토링합니다.
+  - Item 저장 요청이 이미지 참조값을 받아 대표 이미지로 연결할 수 있게 DTO와 저장 로직을 맞춥니다.
+  - 기존 multipart 기반 예시와 문서를 presigned URL 기준으로 갱신합니다.
+- AI 할 일:
+  - AI 서버가 계속 파일 바이너리를 받아야 하는지, 백엔드가 이미지 URL 또는 내부 파일을 다시 전달할 수 있는지 확인합니다.
+  - presigned URL 전환 후에도 classification, receipt OCR, fridge detection 결과 형식은 유지합니다.
+- 공통/통합 할 일:
+  - 업로드 권한, 파일 크기, Content-Type, 만료 시간 기준을 정합니다.
+  - presigned URL 전환 후에도 기존 SCAN 화면의 사용자 흐름이 바뀌지 않는지 확인합니다.
+
+### 2. SCAN 엔드포인트별 이미지 범위 정리
+
+각 SCAN 엔드포인트에서 이미지가 어디까지 저장과 표시로 이어지는지 범위를 분리합니다.
+
+- classification:
+  - 실물 사진을 `recognizedItems`에 포함합니다.
+  - 사용자가 저장하면 실물 사진이 Item 대표 이미지가 됩니다.
+  - 이후 목록, 상세, 홈/요약 등 GET 응답에서 실물 사진이 썸네일로 내려옵니다.
+- receipt OCR:
+  - 기본 표시값은 `emoji`입니다.
+  - 영수증 원본 사진을 Item별 대표 이미지로 나누어 저장하는 기능은 추후 범위로 둡니다.
+- fridge detection:
+  - 기본 표시값은 `emoji`입니다.
+  - 냉장고 전체 사진 또는 crop 이미지를 Item별 대표 이미지로 저장하는 기능은 추후 범위로 둡니다.
+
+### 3. GET 응답 썸네일 일관성 검증
+
+저장된 Item을 어떤 화면에서 조회해도 같은 표시 정책을 따르는지 확인합니다.
+
+- 프론트 할 일:
+  - 목록, 상세, 홈/요약 화면에서 `image` 우선, `emoji` fallback 표시가 같은 기준으로 동작하는지 확인합니다.
+  - image 로딩 실패 시 화면이 깨지지 않고 emoji 또는 기본 표시값으로 내려갈 수 있게 처리합니다.
+- 백엔드 할 일:
+  - Item list/detail/home summary/analytics preview 등 Item 썸네일을 포함하는 응답의 필드 기준을 맞춥니다.
+  - classification 저장 Item은 image primary, OCR/detection 저장 Item은 emoji primary가 되는지 통합 테스트합니다.
+  - image가 없는 Item에 대해 emoji 매핑이 누락되지 않는지 확인합니다.
+- 공통/통합 할 일:
+  - classification으로 저장한 식재료와 OCR/detection으로 저장한 식재료를 섞어 조회하는 시나리오를 검증합니다.
+  - API 문서와 예시 JSON을 실제 응답 기준으로 갱신할 항목을 정리합니다.
 
 ## 15주차
 
