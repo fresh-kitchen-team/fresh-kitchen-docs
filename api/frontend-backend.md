@@ -1,7 +1,7 @@
 # Frontend-Backend API
 
 Status: draft
-Updated: 2026-05-19
+Updated: 2026-05-25
 
 ## Purpose
 
@@ -237,15 +237,39 @@ urgentCount는 D-0 ~ D-3 범위이며 만료된 항목은 제외합니다. urgen
 
 보관 팁은 `category` 쿼리 파라미터로 필터링할 수 있습니다. 미입력 시 전체 반환.
 
+## Auth API
+
+인증 관련 API입니다.
+
+| Flow | Method | Path | Auth | Description |
+|---|---|---|---|---|
+| logout | `POST` | `/api/v1/auth/logout` | 필요 | Refresh Token 무효화 + Access Token 블랙리스트 등록. 호출 후 클라이언트는 로컬 토큰 삭제 필요. 멱등 (재호출 시에도 200) |
+
+## User API
+
+유저 계정 관련 API입니다.
+
+| Flow | Method | Path | Auth | Description |
+|---|---|---|---|---|
+| delete (소프트 삭제) | `DELETE` | `/api/v1/users/me` | 필요 | 계정 비활성화 (INACTIVE). 같은 소셜 계정으로 재로그인 시 자동 복구 |
+| hard delete (dev 전용) | `DELETE` | `/api/v1/dev/users/{userId}` | 필요 | 유저 및 연관 데이터 완전 삭제. local/dev 프로필에서만 활성화 |
+
 ## Inquiry API
 
-문의하기 API는 관리자 이메일로 문의/신고를 발송합니다.
+문의하기 API는 DB 저장 + 관리자 이메일 발송 + 앱 내 조회/답변을 지원합니다.
 
-| Flow | Method | Path | Auth | Example |
-|---|---|---|---|---|
-| create | `POST` | `/api/v1/inquiries` | 필요 | [inquiry/create.json](examples/frontend-backend/inquiry/create.json) |
+| Flow | Method | Path | Auth | Content-Type | Description |
+|---|---|---|---|---|---|
+| create | `POST` | `/api/v1/inquiries` | 필요 | multipart/form-data | 문의/신고 등록. type, category, content(필수), image(선택). 201 응답에 inquiryId 포함 |
+| list | `GET` | `/api/v1/inquiries` | 필요 | - | 내 문의 목록 최신순 조회. contentPreview(50자) 포함 |
+| detail | `GET` | `/api/v1/inquiries/{inquiryId}` | 필요 | - | 문의 상세 + 관리자 답변 조회. 본인 문의가 아니면 404 |
+| reply (관리자) | `PUT` | `/api/v1/admin/inquiries/{inquiryId}/reply` | 필요 | application/json | 관리자 답변 등록. 답변 시 FCM 푸시 발송. body: `{ "reply": "string" }` |
 
-multipart/form-data로 type, category, content, image(선택)를 전송합니다.
+### Inquiry Enums
+
+- `type`: `INQUIRY` (문의) / `REPORT` (신고)
+- `category`: `RECIPE` (레시피 관련) / `AI` (AI 관련) / `OTHER` (기타)
+- `status`: `PENDING` (대기) / `ANSWERED` (답변 완료)
 
 ## Legal API
 
